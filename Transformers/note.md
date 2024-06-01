@@ -23,27 +23,101 @@
 
 此外还有一些如Megatron-LM、GPT-J、OPT、T5、FLAN-T5等由科技公司和研究机构开源的大模型。这些模型大多基于Transformer架构,通过在大规模语料上预训练,可以应用于对话、问答、摘要、写作等多种自然语言任务。开源社区也基于这些模型进行了大量的微调和应用拓展。
 
+## 常见推理架构
+
+### vLLM
+
+vLLM 运行大模型非常快，主要使用以下方法实现：
+
+- **先进的服务吞吐量**：vLLM 提供了最先进的服务吞吐量，能够处理大量并发请求。
+- **PagedAttention**：通过 PagedAttention 对 attention key 和 value 内存进行有效管理，减少内存占用并提高效率[1][2]。
+- **连续批处理**：对输入请求进行连续批处理，优化处理速度和资源利用率[1][2]。
+- **高度优化的 CUDA 内核**：使用高度优化的 CUDA 内核来加速模型执行，确保高效的推理性能[1][2]。
+
+### OpenLLM
+
+OpenLLM 运行大模型非常快，主要使用以下方法实现：
+
+- **促进实际生产过程中的大模型的部署、微调、服务和监测**：OpenLLM 提供了一个开放平台，支持大模型的部署、微调、服务和监测，简化了大模型在生产环境中的使用[6][7]。
+- **灵活的 API**：提供 RESTful API 和 gRPC 接口，支持多种查询方式，方便集成和使用[6][7]。
+- **与 BentoML 和 LangChain 的集成**：支持与 BentoML 和 LangChain 的无缝集成，允许用户轻松创建和部署复杂的 AI 应用[6][7]。
+
+### DeepSpeed-MII
+
+DeepSpeed-MII 运行大模型非常快，主要使用以下方法实现：
+
+- **MII (Model Implementations for Inference)**：提供加速的文本生成推理，通过以下技术实现高效推理[11][12]：
+  - **Blocked KV Caching**：优化缓存机制，提高推理速度[11][12]。
+  - **Continuous Batching**：连续批处理请求，减少延迟并提高吞吐量[11][12]。
+  - **Dynamic SplitFuse**：动态分割和融合计算，提高计算效率[11][12]。
+  - **高性能的 CUDA 内核**：使用高性能的 CUDA 内核来加速推理过程[11][12]。
+
+### TensorRT-LLM
+
+TensorRT-LLM 运行大模型非常快，主要使用以下方法实现：
+
+- **组装优化大语言模型推理解决方案的工具**：提供一个工具箱，用于组装和优化大语言模型的推理解决方案[15][16]。
+- **Python API**：提供易于使用的 Python API 来定义大模型，并为 NVIDIA GPU 编译高效的 TensorRT 引擎[15][16]。
+- **量化技术**：支持 INT4 和 INT8 权重量化，以及 FP8 格式，减少内存占用并提高推理速度[15][16]。
+- **多 GPU 和多节点支持**：支持多 GPU 和多节点的并行计算，提高推理性能和扩展性[15][16]。
+
+通过这些方法和技术，这些平台能够显著提高大模型的推理速度和效率，满足实际生产环境中的高性能需求。### vLLM
+
+vLLM 运行大模型非常快，主要使用以下方法实现：
+
+- **先进的服务吞吐量**：vLLM 提供了最先进的服务吞吐量，能够处理大量并发请求。
+- **PagedAttention**：通过 PagedAttention 对 attention key 和 value 内存进行有效管理，减少内存占用并提高效率[1][2]。
+- **连续批处理**：对输入请求进行连续批处理，优化处理速度和资源利用率[1][2]。
+- **高度优化的 CUDA 内核**：使用高度优化的 CUDA 内核来加速模型执行，确保高效的推理性能[1][2]。
+
+### OpenLLM
+
+OpenLLM 运行大模型非常快，主要使用以下方法实现：
+
+- **促进实际生产过程中的大模型的部署、微调、服务和监测**：OpenLLM 提供了一个开放平台，支持大模型的部署、微调、服务和监测，简化了大模型在生产环境中的使用[6][7]。
+- **灵活的 API**：提供 RESTful API 和 gRPC 接口，支持多种查询方式，方便集成和使用[6][7]。
+- **与 BentoML 和 LangChain 的集成**：支持与 BentoML 和 LangChain 的无缝集成，允许用户轻松创建和部署复杂的 AI 应用[6][7]。
+
+### DeepSpeed-MII
+
+DeepSpeed-MII 运行大模型非常快，主要使用以下方法实现：
+
+- **MII (Model Implementations for Inference)**：提供加速的文本生成推理，通过以下技术实现高效推理[11][12]：
+  - **Blocked KV Caching**：优化缓存机制，提高推理速度[11][12]。
+  - **Continuous Batching**：连续批处理请求，减少延迟并提高吞吐量[11][12]。
+  - **Dynamic SplitFuse**：动态分割和融合计算，提高计算效率[11][12]。
+  - **高性能的 CUDA 内核**：使用高性能的 CUDA 内核来加速推理过程[11][12]。
+
+### TensorRT-LLM
+
+TensorRT-LLM 运行大模型非常快，主要使用以下方法实现：
+
+- **组装优化大语言模型推理解决方案的工具**：提供一个工具箱，用于组装和优化大语言模型的推理解决方案[15][16]。
+- **Python API**：提供易于使用的 Python API 来定义大模型，并为 NVIDIA GPU 编译高效的 TensorRT 引擎[15][16]。
+- **量化技术**：支持 INT4 和 INT8 权重量化，以及 FP8 格式，减少内存占用并提高推理速度[15][16]。
+- **多 GPU 和多节点支持**：支持多 GPU 和多节点的并行计算，提高推理性能和扩展性[15][16]。
+
+通过这些方法和技术，这些平台能够显著提高大模型的推理速度和效率，满足实际生产环境中的高性能需求。
+
 Citations:
-[1] https://cloud.tencent.com/developer/article/2217896
-[2] https://www.51cto.com/article/769820.html
-[3] https://top.aibase.com/tool/yolo-nas-pose
-[4] https://cloud.tencent.com/developer/article/2288178
-[5] https://www.infoq.cn/article/9dlxasjhzypasptsz2gr
-[6] https://openi.org.cn/html/2023/dongtai_0928/693.html
-[7] https://cloud.tencent.com/developer/article/1855265
-[8] https://www.jiqizhixin.com/articles/2023-05-19-4
-[9] https://juejin.cn/post/7247089411803562040
-[10] https://marketplace.huaweicloud.com/article/1-76780adb568e37a132deedac238fd089
-[11] http://www.deeprlhub.com/d/703-2016-2022idea
-[12] https://developer.aliyun.com/article/1283220
-[13] https://github.com/HqWu-HITCS/Awesome-Chinese-LLM
-[14] https://my.oschina.net/oscpyaqxylk/blog/8727824
-[15] https://juejin.cn/post/7109424435534233630
-[16] https://blog.csdn.net/allenhsu6/article/details/115622313
-[17] https://developer.aliyun.com/article/1293994
-[18] https://www.zhihu.com/question/49230922
-[19] https://developer.aliyun.com/article/900193
-[20] https://cloud.tencent.com/developer/article/1955325
+[1] https://github.com/vllm-project/vllm
+[2] https://vllm.readthedocs.io/_/downloads/en/latest/pdf/
+[3] https://blog.vllm.ai/2023/06/20/vllm.html
+[4] https://docs.vllm.ai/en/latest/getting_started/quickstart.html
+[5] https://docs.bentoml.com/en/latest/use-cases/large-language-models/vllm.html
+[6] https://pypi.org/project/openllm/0.1.2/
+[7] https://www.bentoml.com/blog/announcing-open-llm-an-open-source-platform-for-running-large-language-models-in-production
+[8] https://rocm.blogs.amd.com/artificial-intelligence/openllm/README.html
+[9] https://docs.bentoml.org/en/latest/quickstarts/deploy-a-large-language-model-with-openllm-and-bentoml.html
+[10] https://bentoml.com/blog/openllm-in-action-part-1-understanding-the-basics-of-openllm
+[11] https://github.com/microsoft/DeepSpeed-MII
+[12] https://www.microsoft.com/en-us/research/project/deepspeed/deepspeed-mii/
+[13] https://towardsdatascience.com/deepspeed-deep-dive-model-implementations-for-inference-mii-b02aa5d5e7f7
+[14] https://github.com/microsoft/DeepSpeed-MII/blob/main/mii/legacy/README.md
+[15] https://github.com/NVIDIA/TensorRT-LLM
+[16] https://developer.nvidia.com/tensorrt
+[17] https://nvidia.github.io/TensorRT-LLM/
+[18] https://developer.nvidia.com/blog/nvidia-tensorrt-llm-supercharges-large-language-model-inference-on-nvidia-h100-gpus/
 
 ## 常见集成学习方法回顾
 根据以上搜索结果,我总结了常见的集成学习方法及其基本思想如下:
@@ -106,12 +180,160 @@ Citations:
 
 反向传播算法的关键在于利用链式法则逐层计算梯度，并更新权重以最小化损失函数。这个过程需要对每一层进行迭代，直到达到预定的迭代次数或损失函数收敛到一个小值。
 
+## 大模型微调
+
+大模型微调主要包括以下几种类型：
+
+1. **参数微调**：对预训练模型的参数进行微调，以适应特定领域的数据和任务[2]。
+2. **特征微调**：通过修改预训练模型的输入特征来适应特定领域的方法[2]。
+3. **结构微调**：对预训练模型的结构进行修改，以适应特定领域的需求[2]。
+4. **全微调**：对整个预训练模型进行微调[3]。
+5. **部分微调**：仅更新模型的顶层或一小部分中间层的参数，保留大部分或全部底层预训练模型参数不变[3]。
+
+### P-tuning 和 SFT 之间的区别
+
+**P-tuning** 和 **SFT**（监督微调）是两种不同的微调方法：
+
+- **P-tuning**：
+  - **定义**：P-tuning 是一种参数高效的微调方法，主要通过在输入前缀上进行微调来调整模型的表现[4]。
+  - **特点**：P-tuning v2 是对 P-tuning v1 的改进，旨在减少微调所需的参数量和计算资源[4]。
+  - **应用**：适用于需要高效微调的大模型，减少资源消耗[4]。
+
+- **SFT（监督微调）**：
+  - **定义**：SFT 是一种传统的监督微调方法，通过对预训练模型的全量参数进行微调来适应特定任务[4]。
+  - **特点**：SFT 需要大量的资源和时间，因为它涉及对整个模型参数的调整[4]。
+  - **应用**：适用于需要高精度调整的任务，但资源消耗较大[4]。
+
+总结来说，P-tuning 更加注重参数和计算资源的高效利用，而 SFT 则是对模型进行全面的参数调整，适用于需要精细调整的任务。
+
+## SFT的常见量化方法、不同量化方法之间的区别？
+
+### RAG项目的主要问题，如何进行解决？
+
+​      1. RAG项目的场景需要定义在用户的问题能够通过部分语料进行知识补充的角度上，需要在项目开始前，就对场景有所评估，是否有足够的数据（或可以生成数据）作为知识补充，使得用户的问题能够在部分的语料的辅佐下得到正确的回答；
+
+	2. 用户Query对语料库的语义命中率低，通过对既有语料，找到一些合适的用户询问角度，采用LLM模拟真实用户模拟问答对，或模拟业务对应的说明来补充数据量；可以在用户输入时 / 输入后采用RAG搜索相关语料，并且推测相关问题；
+	2. 语料段的处理 合适的chunk和分割策略，既有语料的局部分割，对不同类型的数据率先进行分类等； 
+	2. 用户问询本身并不准确 LLM补充，多轮问询策略
+	2. 基于SFT的RAG补充，利用LLM本身的泛化能力使得首答的准确率上升，以及SFT之后的模型的response对于Corpus的命中率更高的特点
+
+
+
+## 大模型为什么会乱说话
+
+大模型会出现“乱说话”现象，主要原因包括以下几个方面：
+
+1. **数据分布不一致**：训练数据与实际应用场景存在显著差异，导致模型学到的特征在实际应用中不适用，从而生成不准确的内容[1]。
+2. **过拟合**：大型模型的参数量庞大，容易在训练数据上产生过拟合，即过分适应噪声或非代表性数据，这并不一定反映真实场景[1]。
+3. **标签噪声**：训练数据中的错误标签可能导致模型学到错误的知识，进而生成与实际情况不符的内容[1]。
+4. **统计关联而非逻辑推理**：大模型如ChatGPT通过概率最大化生成数据，而不是通过逻辑推理生成回复，这种方法容易导致虚假关联和拼凑的结果[1]。
+
+### 解决大模型“幻觉”问题的方法
+
+1. **数据清洗与增强**：清理数据集中的噪声和异常值，提高训练数据的质量，同时采用数据增强技术生成更多多样性的训练样本，以提高模型的泛化能力[1]。
+2. **正则化技术**：引入权重衰减、Dropout等正则化技术，减少模型的复杂度，防止过拟合[1]。
+3. **交叉验证**：通过交叉验证评估模型在不同子集上的性能，防止模型在特定数据集上过度优化，增强模型的泛化能力[1]。
+4. **迁移学习**：在其他任务上预训练模型，将先验知识引入目标任务，避免在训练过程中过分适应训练数据[1]。
+
+这些方法可以帮助减少大模型生成虚假或误导性内容的概率，提高其在实际应用中的可靠性和准确性。
+
+## 什么是Paged Attention? 
+
+PagedAttention是一种旨在显著减少大语言模型（LLM）中键值缓存（KV cache）内存占用的技术。其核心思想是将每个序列的KV缓存划分为更小、更易管理的“页”或块。每个块包含固定数量的令牌的键值向量，这样可以在注意力计算过程中更高效地加载和访问KV缓存[1][2]。
+
+PagedAttention的内存管理方式类似于操作系统中的虚拟内存管理。它将数据的逻辑组织与物理存储分离，通过块表将序列的逻辑块映射到可能不连续的物理块。这种抽象允许更灵活的内存利用，当生成新令牌时，可以分配新的物理块[1][2]。
+
+### PagedAttention在大语言模型中的应用
+
+PagedAttention在大语言模型中的应用主要体现在以下几个方面：
+
+1. **内存管理**：
+   - **非连续内存存储**：PagedAttention允许将KV块存储在非连续的物理内存中，从而实现更灵活的分页内存管理。这种方法减少了内存碎片，提高了内存利用率[2][3]。
+   - **动态内存分配**：通过动态分配内存块，PagedAttention可以根据需要增长内存使用量，避免了静态内存分配带来的浪费[5]。
+
+2. **高效的注意力计算**：
+   - **块级注意力计算**：在注意力计算过程中，PagedAttention内核识别并分别获取不同的KV块，从而提高计算效率[2]。
+   - **并行采样和束搜索**：PagedAttention在并行采样和束搜索中可以重用块，减少内存开销。例如，在束搜索中，PagedAttention可以在多个搜索路径之间重用块，从而降低内存使用[3][5]。
+
+3. **共享前缀提示**：
+   - **系统提示重用**：在许多情况下，用户会提供一个适用于所有任务的“系统”提示。PagedAttention允许为这部分提示分配的块在多个请求之间重用，从而减少内存使用[3][5]。
+
+4. **分布式执行**：
+   - **vLLM系统**：PagedAttention被集成到vLLM系统中，该系统包含调度器、KV缓存管理器、工作节点（包含GPU硬件的计算机）和块分配器。vLLM系统通过这些组件实现高效的分布式执行和内存管理[3][5]。
+
+### 结论
+
+PagedAttention通过将KV缓存划分为更小的块并利用查找表进行高效访问，显著减少了大语言模型的内存占用。这种技术不仅提高了内存利用率，还增强了模型的吞吐量和响应速度，使得大语言模型在实际应用中更加高效和可扩展[1][2][3][5]。
+
 Citations:
-[1] https://harrymei.github.io/2018/12/14/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95%E6%8E%A8%E5%AF%BC/
-[2] https://github.com/INTERMT/BP-Algorithm
-[3] https://blog.csdn.net/ft_sunshine/article/details/90221691
-[4] https://martinlwx.github.io/zh-cn/backpropagation-tutorial/
-[5] https://halfrost.com/neural_networks_learning/
-[6] https://soptq.me/2020/10/11/bp-algorithm/
-[7] https://www.cnblogs.com/jsfantasy/p/12177275.html
-[8] https://github.com/EthanYuan/TensorFlow-Zero-to-N/blob/master/TensorFlow%E4%BB%8E0%E5%88%B0N/TensorFlow%E4%BB%8E0%E5%88%B01/10-NN%E5%9F%BA%E6%9C%AC%E5%8A%9F%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%9A%84%E6%8E%A8%E5%AF%BC.md
+[1] https://www.hopsworks.ai/dictionary/pagedattention
+[2] https://arxiv.org/pdf/2309.06180.pdf
+[3] https://newsletter.micahlerner.com/p/paper-review-efficient-memory-management
+[4] https://www.modular.com/ai-resources/efficient-memory-management-for-large-language-model-serving-with-pagedattention
+[5] https://www.micahlerner.com/2024/01/11/efficient-memory-management-for-large-language-model-serving-with-pagedattention.html
+
+
+
+### 与Paged Attention对比的是什么样的方法？为什么Paged Attention更有效？
+
+#### 传统的静态内存分配方法
+
+1. **固定大小的内存分配**：
+   - 传统的静态内存分配方法在编译时确定内存大小，并且在程序运行期间无法更改。这意味着即使程序只需要一部分内存，整个预分配的内存块仍然会被占用，导致内存浪费[1][2][3]。
+   - 例如，在处理最大长度为2048的序列时，即使实际输入序列较短，系统也会为每个请求预留2048的内存空间，导致大量未使用的内存被浪费[6]。
+
+2. **内存碎片化**：
+   - 静态内存分配容易导致内存碎片化，特别是在处理动态增长和缩减的KV缓存时。这种碎片化会进一步降低内存利用率，增加显存的负担[1][2][3]。
+
+3. **内存利用率低**：
+   - 由于静态内存分配无法动态调整内存大小，未使用的内存部分无法被其他进程或任务利用，导致内存利用率低[1][2][3]。
+
+#### Paged Attention的特点和优势
+
+1. **动态内存分配**：
+   - Paged Attention在运行时动态分配内存，存储的是生成过程中每个令牌的键值对。这种动态分配方式使得内存使用更加灵活和高效[4][5][6]。
+   - Paged Attention通过将KV缓存划分为更小的块（页），并利用查找表进行高效访问，显著减少了内存浪费[5][6][7]。
+
+2. **内存优化技术**：
+   - Paged Attention允许将连续的键值对存储在非连续的物理内存中，从而实现更灵活的分页内存管理。这种方法减少了内存碎片，提高了内存利用率[5][6][7]。
+   - 通过动态分配内存块，Paged Attention可以根据需要增长内存使用量，避免了静态内存分配带来的浪费[5][6][7]。
+
+3. **缓存机制**：
+   - KV Cache通过缓存之前计算的键值对，避免了重复计算，从而减少了计算开销和内存使用。这种缓存机制使得每次生成新令牌时只需计算当前令牌的键值对，而不需要重新计算所有之前的键值对[4][5][6]。
+
+4. **高效的注意力计算**：
+   - Paged Attention在注意力计算过程中，内核识别并分别获取不同的KV块，从而提高计算效率[5][6][7]。
+   - 例如，在束搜索中，Paged Attention可以在多个搜索路径之间重用块，从而降低内存使用[5][6][7]。
+
+#### Paged Attention的具体应用
+
+1. **内存管理**：
+   - Paged Attention通过将KV缓存划分为更小的块，并利用查找表进行高效访问，显著减少了大语言模型的内存占用。这种方法不仅提高了内存利用率，还增强了模型的吞吐量和响应速度，使得大语言模型在实际应用中更加高效和可扩展[5][6][7]。
+
+2. **分布式执行**：
+   - Paged Attention被集成到vLLM系统中，该系统包含调度器、KV缓存管理器、工作节点（包含GPU硬件的计算机）和块分配器。vLLM系统通过这些组件实现高效的分布式执行和内存管理[5][6][7]。
+
+3. **共享前缀提示**：
+   - 在许多情况下，用户会提供一个适用于所有任务的“系统”提示。Paged Attention允许为这部分提示分配的块在多个请求之间重用，从而减少内存使用[5][6][7]。
+
+### 结论
+
+Paged Attention通过动态分配和缓存机制，能够更高效地利用内存资源，减少显存的负担。它通过将KV缓存划分为更小的块，并利用查找表进行高效访问，显著减少了内存浪费。这种方法不仅提高了内存利用率，还增强了模型的吞吐量和响应速度，使得大语言模型在实际应用中更加高效和可扩展[5][6][7]。
+
+Citations:
+[1] https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf
+[2] https://aclanthology.org/W19-4808.pdf
+[3] https://www.youtube.com/watch?v=2TT384U4vQg
+[4] https://developer.nvidia.com/blog/emulating-the-attention-mechanism-in-transformer-models-with-a-fully-convolutional-network/
+[5] https://docs.uipath.com/communications-mining/automation-cloud/latest/developer-guide/efficient-transformers-i-attention-mechanisms
+[6] https://arxiv.org/abs/2210.00640
+[7] https://arxiv.org/abs/2310.12442
+[8] https://arxiv.org/html/2405.01814v1
+[9] https://www.hopsworks.ai/dictionary/pagedattention
+[10] https://www.youtube.com/watch?v=glyu_nQH0yw
+[11] https://rocm.blogs.amd.com/artificial-intelligence/llm-inference-optimize/README.html
+[12] https://arxiv.org/pdf/2309.06180.pdf
+
+1. [LLaMA 模型](https://www.zhihu.com/search?q=LLaMA 模型&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"article"%2C"sourceId"%3A"694374438"})为什么要用[旋转位置编码](https://www.zhihu.com/search?q=旋转位置编码&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"article"%2C"sourceId"%3A"694374438"})？
+2. 你训练的时候用 float16，还是[bfloat16](https://www.zhihu.com/search?q=bfloat16&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"article"%2C"sourceId"%3A"694374438"})，float32？为什么？
+3. 怎么解决训练使用float16导致溢出的问题？
