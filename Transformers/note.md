@@ -337,3 +337,14 @@ Citations:
 1. [LLaMA 模型](https://www.zhihu.com/search?q=LLaMA 模型&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"article"%2C"sourceId"%3A"694374438"})为什么要用[旋转位置编码](https://www.zhihu.com/search?q=旋转位置编码&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"article"%2C"sourceId"%3A"694374438"})？
 2. 你训练的时候用 float16，还是[bfloat16](https://www.zhihu.com/search?q=bfloat16&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"article"%2C"sourceId"%3A"694374438"})，float32？为什么？
 3. 怎么解决训练使用float16导致溢出的问题？
+
+## Multi-head Attention 和 Dot Product 的实现
+hidden_states: shape [batch_size, hidden_size]
+q, k, v proj matrix: shape [hidden_size, num_head*head_size]
+o proj matrix: shape [num_head*head_size, hidden_size]
+
+
+## 各种不同模型的范式 / 位置编码方法 / 激活函数 / Transformer层数 / 隐藏层之间的对比 
+![alt text](image.png)
+
+## [几种不同的分词方法和它们各自的特征](https://zhuanlan.zhihu.com/p/643829565) 
